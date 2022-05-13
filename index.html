@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Image Splicing Detection | Home</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+		body {
+			margin: auto;
+			width: 80%;
+			background-repeat: no-repeat;
+			height: 94vh;
+			background: rgb(2, 0, 36);
+			background: linear-gradient(175deg, rgba(2, 0, 36, 1) 0%, rgba(9, 19, 121, 1) 49%, rgba(0, 212, 255, 1) 100%);
+			position: relative;
+			overflow: hidden;
+		}
+
+
+
+		.nav {
+			text-align: center;
+			font-size: 30px;
+			font-family: sans-serif;
+			color: #fff;
+		}
+
+		.input-image {
+			background-color: grey;
+			text-align: center;
+			font-family: sans-serif;
+
+		}
+
+		.result {
+			height: 100px;
+			width: 500px;
+			background-color: #fff;
+			font-family: serif;
+			font-weight: bold;
+			font-size: 32px;
+			text-align: center;
+			margin-left: 130px;
+		}
+
+		#footer {
+			font-family: sans-serif;
+			position: fixed;
+			margin-top: 100%;
+
+
+		}
+	</style>
+
+</head>
+
+<body>
+	<header>
+		<center>
+			<nav class="nav">
+				<h1>Image Splicing Detection 1.0</h1>
+
+			</nav>
+
+		</center>
+
+
+	</header>
+	<section id="input-r">
+		<center>
+			<div class="input-image">
+				<form method="POST" action="http://localhost:3000/prediction" enctype="multipart/form-data" id="idForm">
+					<label>
+						<h3>Upload Image<h3>
+					</label>
+					<input type="file" name="image" id="test" value="Upload an image"><br><br>
+					<input type="submit" name="submit" value="submit" id="btn-submit">
+
+
+
+				</form>
+
+			</div>
+			<br><br>
+			<div class="result" id="result"></div>
+
+		</center>
+
+
+	</section><br><br><br><br><br><br><br><br><br><br><br><br>
+	<footer>
+		<center>
+			<h4>Copyright @:2021 All Rights Reserved</h4>
+
+		</center>
+
+
+	</footer>
+
+	<script>
+
+		$("#idForm").submit(function (e) {
+
+			e.preventDefault(); // avoid to execute the actual submit of the form.
+
+			var form = $(this);
+			var url = form.attr('action');
+			var formData = new FormData();
+
+			const file = document.querySelector('#test').files[0];
+			formData.append("image", file)
+			console.log(file)
+			$.ajax({
+				type: "POST",
+				url: "http://localhost:3000/prediction",
+				data: formData,
+				contentType: false,
+				processData: false,
+				success: function (result) {
+					//alert(JSON.stringify(result));
+					console.log(result)
+					document.getElementById('result').innerHTML = result['description'];
+
+
+				}
+			});
+
+
+		});
+
+
+
+	</script>
+
+</body>
+
+</html>
