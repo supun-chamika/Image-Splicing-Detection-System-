@@ -6,8 +6,8 @@ This is a complementary approach to detect spliced images that are widely create
 To install this on your local machine, please execute following commands.
 
 ```
-$ git clone https://github.com/Akalanka-1996/image_splicing_detection
-$ cd image_splicing_detection
+$ git clone https://github.com/supun-chamika/Image-Splicing-Detection-System-
+$ cd Image-Splicing-Detection-System-
 ```
 
 In order to run this application, it is **mandatory** to have installed [python](https://www.python.org/) and [node](https://nodejs.org/en/) in your system.
